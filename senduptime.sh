@@ -5,7 +5,7 @@
 
 UPTIME=`uptime -s`
 
-STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME" https://difont.uab.cat/setuptime.php`
+STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME" https://difont.uab.cat/setuptime`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget setuptime
