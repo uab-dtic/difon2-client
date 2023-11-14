@@ -25,7 +25,7 @@ fi
 
 echo $ESTPANT > /var/lib/pantalles/tvstatus
 
-STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC" https://difont.uab.cat/getstatus.php`
+STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC" https://difont.uab.cat/getstatus`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus
@@ -40,19 +40,27 @@ case $STATUS in
   ;;
 
   10)
-    echo "Apagar Cliente"
+    #echo "Apagar Client"
+    logger "DIFON: $0: Apagar Client"
+    sudo poweroff
   ;;
 
   01)
-    echo "Apagar Pantalla"
+    #echo "Apagar Pantalla"
+    logger "DIFON: $0: Apagar Pantalla"
+    /home/pi/scripts/tvoff.sh
   ;;
 
   02)
-    echo "Encender Pantalla"
+    #echo "Encendre Pantalla"
+    logger "DIFON: $0: Encendre Pantalla"
+    /home/pi/scripts/tvon.sh
   ;;
 
   03)
     echo "Reiniciar Cliente"
+    logger "DIFON: $0: Reiniciar PC"
+    sudo reboot
   ;;
 
   *)
