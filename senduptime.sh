@@ -13,4 +13,8 @@ if [ "$?" -gt 0 ]; then
   exit $?
 fi
 
+#Clonem el repositori de scripts
+git clone https://github.com/uab-dtic/difon2-client.git /home/pi/scripts
+chmod +x /home/pi/scripts/*.sh
+
 exit 0
