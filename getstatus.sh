@@ -5,10 +5,27 @@
 #     Codi de wget en cas d'error amb el server
 #     -2 en cas de resposta del server desconeguda
 
-PANTALLA=`cat /var/lib/pantalles/tvstatus`
+# Obtenim la interface de xaxa
+INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 
-STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$PANTALLA" https://difont.uab.cat/getstatus.php`
+# Obtenim la MAC address
+MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
+# Guardem l'estat de la pantalla que ens diu CEC
+ESTPANT=`timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4"
+
+if [ "$?" -eq 124 ]; then
+#Ha sortit per timeout
+  logger "DIFON: $0: Pantalla triga massa en donar el seu estat. Codi d'error: 124"
+fi
+
+if ["$ESTPANT" -eq ""]; then 
+  ESTPANT="unknown"
+fi
+
+echo $ESTPANT > /var/lib/pantalles/tvstatus
+
+STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC" https://difont.uab.cat/getstatus.php`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus
@@ -44,12 +61,3 @@ case $STATUS in
     exit -2
   ;;
 esac
-
-# Guardem l'estat de la pantalla que ens diu CEC
-timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4 > /var/lib/pantalles/tvstatus"
-
-if [ "$?" -eq 124 ]; then
-#Ha sortit per timeout
-  logger "DIFON: $0: Pantalla triga massa en donar el seu estat. Codi d'error: 124"
-  exit $?
-fi
