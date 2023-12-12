@@ -5,7 +5,10 @@
 
 UPTIME=`uptime -s`
 
-STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME" https://difont.uab.cat/setuptime`
+# Obtenim la MAC address
+MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+
+STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC" https://difont.uab.cat/setuptime`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget setuptime
