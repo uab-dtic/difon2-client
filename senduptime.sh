@@ -3,12 +3,15 @@
 # Script per enviar al servidor des de quan ha arrencat
 # El format és YYYY-MM-DD hh:mm:ss Ex: 2023-11-10 08:55:06
 
+#Obtenim la versió
+VERSION=`cat version`
+
 UPTIME=`uptime -s`
 
 # Obtenim la MAC address
 MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
-STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC" https://difont.uab.cat/setuptime`
+STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC&version=$VERSION" https://difont.uab.cat/setuptime`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget setuptime

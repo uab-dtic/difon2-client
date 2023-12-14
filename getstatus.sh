@@ -5,6 +5,9 @@
 #     Codi de wget en cas d'error amb el server
 #     -2 en cas de resposta del server desconeguda
 
+#Obtenim la versió
+VERSION=`cat version`
+
 # Obtenim la interface de xaxa
 INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 
@@ -25,7 +28,7 @@ fi
 
 echo $ESTPANT > /var/lib/pantalles/tvstatus
 
-STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC" https://difont.uab.cat/getstatus`
+STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$VERSION" https://difont.uab.cat/getstatus`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus
