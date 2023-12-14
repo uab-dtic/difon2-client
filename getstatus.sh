@@ -47,6 +47,12 @@ case $STATUS in
     logger "DIFON: $0: Apagar Client"
     sudo poweroff
   ;;
+  
+  20)
+    echo "Reiniciar Cliente"
+    logger "DIFON: $0: Reiniciar PC"
+    sudo reboot
+  ;;
 
   01)
     #echo "Apagar Pantalla"
@@ -58,12 +64,6 @@ case $STATUS in
     #echo "Encendre Pantalla"
     logger "DIFON: $0: Encendre Pantalla"
     /home/pi/scripts/tvon.sh
-  ;;
-
-  03)
-    echo "Reiniciar Cliente"
-    logger "DIFON: $0: Reiniciar PC"
-    sudo reboot
   ;;
 
   *)
