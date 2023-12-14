@@ -11,6 +11,10 @@ UPTIME=`uptime -s`
 # Obtenim la MAC address
 MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
+echo $VERSION
+echo $UPTIME
+echo $MAC
+
 STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC&version=$VERSION" https://difont.uab.cat/setuptime`
 
 if [ "$?" -gt 0 ]; then
