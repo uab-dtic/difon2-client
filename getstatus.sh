@@ -15,7 +15,7 @@ INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
 # Guardem l'estat de la pantalla que ens diu CEC
-ESTPANT=`timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4"
+ESTPANT=`timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4"`
 
 if [ "$?" -eq 124 ]; then
 #Ha sortit per timeout
