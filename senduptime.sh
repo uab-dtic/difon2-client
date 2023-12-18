@@ -29,4 +29,6 @@ git fetch
 git pull
 chmod +x /home/pi/scripts/*.sh
 
+logger "DIFON: $0: Pantalla arrencada el $UPTIME"
+
 exit 0
