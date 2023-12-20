@@ -5,6 +5,8 @@
 #     Codi de wget en cas d'error amb el server
 #     -2 en cas de resposta del server desconeguda
 
+source functions.sh
+
 #Obtenim la versió
 VERSION=`cat version`
 
@@ -32,43 +34,8 @@ STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus
-  logger "DIFON: $0: Error en petició al servidor. Codi d'error: $?"
+  logger "DIFON: $0: Error en petició al servidor. Codi d'error: $? STATUS: $STATUS"
   exit $?
 fi
 
-case $STATUS in
-
-  00)
-    echo "No hago nada"
-  ;;
-
-  10)
-    #echo "Apagar Client"
-    logger "DIFON: $0: Apagar Client"
-    sudo poweroff
-  ;;
-  
-  20)
-    echo "Reiniciar Cliente"
-    logger "DIFON: $0: Reiniciar PC"
-    sudo reboot
-  ;;
-
-  01)
-    #echo "Apagar Pantalla"
-    logger "DIFON: $0: Apagar Pantalla"
-    /home/pi/scripts/tvoff.sh
-  ;;
-
-  02)
-    #echo "Encendre Pantalla"
-    logger "DIFON: $0: Encendre Pantalla"
-    /home/pi/scripts/tvon.sh
-  ;;
-
-  *)
-    echo "No hacer nada"
-    logger "DIFON: $0: Error en resposta del servidor. Codi d'error: -2"
-    exit -2
-  ;;
-esac
+procesa_status $STATUS

@@ -3,6 +3,8 @@
 # Script per enviar al servidor des de quan ha arrencat
 # El format és YYYY-MM-DD hh:mm:ss Ex: 2023-11-10 08:55:06
 
+source functions.sh
+
 #Obtenim la versió
 VERSION=`cat version`
 
@@ -23,7 +25,9 @@ if [ "$?" -gt 0 ]; then
   exit $?
 fi
 
-#Actualitzem el repositori de scripts
+procesa_status $STATUS
+
+Actualitzem el repositori de scripts
 cd /home/pi/scripts
 git fetch
 git pull
