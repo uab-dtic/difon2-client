@@ -1,9 +1,12 @@
+#!/bin/bash
+
 procesa_status() {
 
 case $1 in
 
   00)
     echo "No hago nada"
+    logger "DIFON: $0: No faig res"
   ;;
 
   10)
@@ -32,7 +35,7 @@ case $1 in
 
   *)
     echo "No hacer nada"
-    logger "DIFON: $0: Error en resposta del servidor. Codi d'error: -2"
+    logger "DIFON: $0: Error en resposta del servidor. Codi d'error: -2 STATUS: $1"
     exit -2
   ;;
 esac

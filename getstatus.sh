@@ -5,16 +5,16 @@
 #     Codi de wget en cas d'error amb el server
 #     -2 en cas de resposta del server desconeguda
 
-source functions.sh
+source ./functions.sh
 
 #Obtenim la versió
-VERSION=`cat version`
+VERSION=`cat ./version`
 
 # Obtenim la interface de xaxa
 INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 
 # Obtenim la MAC address
-MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+MAC=`/usr/sbin/ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
 # Guardem l'estat de la pantalla que ens diu CEC
 ESTPANT=`timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4"`
