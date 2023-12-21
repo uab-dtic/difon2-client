@@ -22,15 +22,40 @@ case $1 in
   ;;
 
   01)
-    #echo "Apagar Pantalla"
+    echo "Apagar Pantalla"
     logger "DIFON: $0: Apagar Pantalla"
     /home/pi/scripts/tvoff.sh
   ;;
 
   02)
-    #echo "Encendre Pantalla"
+    echo "Encendre Pantalla"
     logger "DIFON: $0: Encendre Pantalla"
     /home/pi/scripts/tvon.sh
+  ;;
+
+  80)
+    echo "Error data buida"
+    logger "DIFON: $0: Error data buida"
+  ;;
+
+  81)
+    echo "Error en la data rebuda"
+    logger "DIFON: $0: Error en la data rebuda"
+  ;;
+
+  90)
+    echo "Error MAC buida"
+    logger "DIFON: $0: Error MAC buida"
+  ;;
+
+  91)
+    echo "Error en la MAC rebuda"
+    logger "DIFON: $0: Error en la MAC rebuda"
+  ;;
+
+  92)
+    echo "Error MAC no trobada a la BBDD"
+    logger "DIFON: $0: Error MAC no trobada a la BBDD"
   ;;
 
   *)
