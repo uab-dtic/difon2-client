@@ -17,7 +17,7 @@ echo $VERSION
 echo $UPTIME
 echo $MAC
 
-STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC&version=$VERSION" https://difont.uab.cat/setuptime`
+STATUS=`wget --timeout=10 -qO- --post-data="data=$UPTIME&mac=$MAC&version=$VERSION" https://difont.uab.cat/api/setuptime `
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget setuptime

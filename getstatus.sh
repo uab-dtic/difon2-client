@@ -30,7 +30,7 @@ fi
 
 echo $ESTPANT > /var/lib/pantalles/tvstatus
 
-STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$VERSION" https://difont.uab.cat/getstatus`
+STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$VERSION" https://difont.uab.cat/api/getstatus`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus

@@ -4,7 +4,7 @@ export DISPLAY=:0.0
 # Obtenim la MAC address
 MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
-URL="https://difont.uab.cat/visor/$MAC"
+URL="https://difont.uab.cat/api/visor/$MAC"
 
 chromium-browser --disable-session-crashed-bubble --disable-features=PreloadMediaEngagementData,AutoplayIgnoreWebAudio,MediaEngagementBypassAutoplayPolicies \
 --noerrdialogs \
