@@ -24,7 +24,7 @@ if [ "$?" -eq 124 ]; then
   logger "DIFON: $0: Pantalla triga massa en donar el seu estat. Codi d'error: 124"
 fi
 
-if ["$ESTPANT" -eq ""]; then 
+if [[ "$ESTPANT" -eq "" ]]; then 
   ESTPANT="unknown"
 fi
 
