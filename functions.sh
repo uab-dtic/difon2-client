@@ -9,12 +9,12 @@ case $ACCIO_PC in
 
   0)
     echo "No hago nada"
-    logger "DIFON: $0: No faig res"
+    logger "DIFON: $0: No faig res amb el PC"
   ;;
 
   1)
     #echo "Apagar Client"
-    logger "DIFON: $0: Apagar Client"
+    logger "DIFON: $0: Apagar PC"
     sudo poweroff
   ;;
 
