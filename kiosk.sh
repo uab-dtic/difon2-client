@@ -1,6 +1,12 @@
 #!/bin/bash
 export DISPLAY=:0.0
 
+xset s off
+xset s noblank
+xset dpms 0 0 0
+xset -dpms
+
+
 # Obtenim la MAC address
 MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
