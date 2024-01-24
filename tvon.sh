@@ -1,6 +1,7 @@
 #!/bin/bash
 #Encenem HDMI
-xset -display :0.0 dpms force on
+#xset -display :0.0 dpms force on
+vcgencmd display_power 1
 echo "on 0" | cec-client -s > /dev/null
 echo "on" > /var/lib/pantalles/tvstatus
 
