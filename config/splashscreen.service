@@ -1,0 +1,16 @@
+[Unit]
+Description=boot splash screen
+
+DefaultDependencies=no
+After=local-fs.target
+# Do not put here any After/Before clauses, just let systemd do its job !
+
+[Service]
+
+StandardInput=tty
+StandardOutput=tty
+
+ExecStart=/usr/bin/fim -q -a /home/pi/scripts/splash/splashinici.png 
+
+[Install]
+WantedBy=sysinit.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Difon Start Service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/scripts
+ExecStart=/home/pi/scripts/senduptime.sh
+
+[Install]
+WantedBy=multi-user.target
