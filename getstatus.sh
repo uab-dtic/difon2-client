@@ -16,6 +16,10 @@ INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 # Obtenim la MAC address
 MAC=`/usr/sbin/ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
 
+# Obtenim la IP
+
+IP=`hostname -I`
+
 # Guardem l'estat de la pantalla que ens diu CEC
 ESTPANT=`timeout 20s bash -c "echo scan |cec-client -s -d 1|head -n 13 |grep 'power' |cut  -d' ' -f4"`
 
@@ -30,7 +34,7 @@ fi
 
 echo $ESTPANT > /var/lib/pantalles/tvstatus
 
-STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$VERSION" https://difont.uab.cat/api/getstatus`
+STATUS=`wget --timeout=10 -qO- --post-data="pantalla=$ESTPANT&mac=$MAC&version=$VERSION&ip=$IP" https://difont.uab.cat/api/getstatus`
 
 if [ "$?" -gt 0 ]; then
 #Ha hagut algun error amb wget getstatus

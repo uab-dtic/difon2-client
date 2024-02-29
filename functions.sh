@@ -3,7 +3,8 @@
 procesa_status() {
 
   ACCIO_PC=${1:0:1}
-  ACCIO_PANT=${1:1:2}
+  ACCIO_PANT=${1:1:1}
+  ACCIO_VISOR=${1:2:1}
 
 case $ACCIO_PC in
 
@@ -75,6 +76,5 @@ case $ACCIO_PANT in
     /home/pi/scripts/tvon.sh
   ;;
 esac
-
 
 }

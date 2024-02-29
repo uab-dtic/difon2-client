@@ -1,0 +1,18 @@
+[Unit]
+Description = Start NOVNC
+After = multi-user.target
+ 
+ 
+[Service]
+Type = simple
+User = pi
+Group = pi
+ExecStart = /home/pi/novnc/utils/novnc_proxy  --vnc localhost:5900 --ssl-only --cert /home/pi/novnc/certificate.pem --key /home/pi/novnc/key.pem
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+
+ 
+ 
+[Install]
+WantedBy = multi-user.target

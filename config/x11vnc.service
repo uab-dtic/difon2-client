@@ -1,0 +1,18 @@
+[Unit]
+Description = Start X11VNC
+After = multi-user.target
+ 
+ 
+[Service]
+Type = simple
+User = pi
+Group = pi
+ExecStart = /usr/bin/x11vnc -viewonly -shared -forever -noxdamage -repeat -rfbport 5900
+Restart=always
+# Restart service after 10 seconds if node service crashes
+RestartSec=10
+
+ 
+ 
+[Install]
+WantedBy = multi-user.target
