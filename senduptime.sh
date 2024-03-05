@@ -27,8 +27,9 @@ fi
 
 procesa_status $STATUS
 
-Actualitzem el repositori de scripts
+#Actualitzem el repositori de scripts
 cd /home/pi/scripts
+git checkout test
 git fetch
 git pull
 chmod +x /home/pi/scripts/*.sh
