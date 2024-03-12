@@ -14,7 +14,7 @@ VERSION=`cat ./version`
 INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
 
 # Obtenim la MAC address
-MAC=`/usr/sbin/ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+MAC=`ip link show $INTER | awk '/link\/ether/ {print $2}'`
 
 # Obtenim la IP
 
