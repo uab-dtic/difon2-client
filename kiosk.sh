@@ -7,8 +7,11 @@ xset dpms 0 0 0
 xset -dpms
 
 
+# Obtenim la interface de xaxa
+INTER=`ip link | awk -F: '$0 !~ "lo|vir|wl|^[^0-9]"{print $2;getline}'`
+
 # Obtenim la MAC address
-MAC=`ifconfig $INTER | grep -o -E '([[:xdigit:]]{1,2}:){5}[[:xdigit:]]{1,2}'`
+MAC=`ip link show $INTER | awk '/link\/ether/ {print $2}'`
 
 URL="https://difont.uab.cat/api/visor/$MAC"
 
