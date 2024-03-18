@@ -7,7 +7,7 @@ After = multi-user.target
 Type = simple
 User = root
 Group = root
-ExecStart = /home/pi/novnc/utils/novnc_proxy --listen 443 --vnc localhost:5900 --ssl-only --cert /home/pi/novnc/certificate.pem --key /home/pi/novnc/key.pem
+ExecStart = /home/pi/novnc/utils/novnc_proxy --web /home/pi/novnc/web --listen 443 --vnc localhost:5900 --ssl-only --cert /home/pi/novnc/certificate.pem --key /home/pi/novnc/key.pem
 Restart=always
 # Restart service after 10 seconds if node service crashes
 RestartSec=10
